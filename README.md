@@ -11,7 +11,7 @@ what if all you needed to type was `d`?
 requires bun.
 
 ```sh
-npm i -g devault
+bun i -g devault-cli
 ```
 
 ## usage

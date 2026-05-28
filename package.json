@@ -1,10 +1,10 @@
 {
-  "name": "devault",
+  "name": "devault-cli",
   "version": "0.1.0",
   "description": "A directory-aware default dev command launcher.",
   "type": "module",
   "bin": {
-    "d": "./dist/cli.js"
+    "d": "dist/cli.js"
   },
   "files": [
     "dist"
