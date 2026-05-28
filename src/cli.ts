@@ -1,7 +1,7 @@
 #!/usr/bin/env bun
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { homedir } from "node:os";
-import { dirname, join, resolve } from "node:path";
+import { basename, dirname, join, resolve } from "node:path";
 import { spawn } from "node:child_process";
 import { stdin as input, stdout as output } from "node:process";
 
@@ -166,6 +166,7 @@ async function guard(command: string, action: string): Promise<void> {
 }
 
 function run(root: string, command: string): Promise<number> {
+  setTerminalTitle(root, command);
   console.log(`d: ${root} -> ${command}`);
 
   return new Promise((resolveCode) => {
@@ -183,6 +184,11 @@ function run(root: string, command: string): Promise<number> {
       resolveCode(code ?? 0);
     });
   });
+}
+
+function setTerminalTitle(root: string, command: string): void {
+  if (!output.isTTY) return;
+  output.write(`\u001b]0;${basename(root) || root} • ${command}\u0007`);
 }
 
 main()
